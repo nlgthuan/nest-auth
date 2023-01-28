@@ -16,7 +16,7 @@ const dataSourceConfig = {
 
 const dataSource = new DataSource({
   ...dataSourceConfig,
-  migrations: [join(__dirname, 'database')],
+  migrations: [join(__dirname, 'migrations', '*')],
   entities: ['src/**/*.entity{.ts,.js}'],
 });
 
