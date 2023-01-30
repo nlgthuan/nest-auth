@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { CreateUseDto } from 'src/auth/dto/create-user.dto';
 import { Repository } from 'typeorm';
 
 import { User } from './entities/user.entity';
@@ -20,5 +21,13 @@ export class UsersService {
 
   async checkPassword(user: User, password: string): Promise<boolean> {
     return bcrypt.compare(user.password, password);
+  }
+
+  async create(createUserDto: CreateUseDto) {
+    const user = this.usersRepository.create(createUserDto);
+
+    await this.usersRepository.save(user);
+
+    return user;
   }
 }
