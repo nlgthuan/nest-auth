@@ -46,4 +46,4 @@ $ yarn run test:cov
 - [x] Follow the tutorial to implement the Authentication flow using Passport with local strategy and jwt strategy
 - [x] Set up DB with TypeORM and create User model
 - [x] Env variables
-- [ ] Bcrypt
+- [x] Bcrypt
