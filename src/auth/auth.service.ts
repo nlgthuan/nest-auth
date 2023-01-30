@@ -12,10 +12,11 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
+    if (user && (await this.usersService.checkPassword(user, pass))) {
       const { id, username } = user;
       return { id, username };
     }
+
     return null;
   }
 

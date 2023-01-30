@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
 import { User } from './entities/user.entity';
@@ -15,5 +16,9 @@ export class UsersService {
     return this.usersRepository.findOneBy({
       username,
     });
+  }
+
+  async checkPassword(user: User, password: string): Promise<boolean> {
+    return bcrypt.compare(user.password, password);
   }
 }
