@@ -24,6 +24,7 @@ describe('AuthController (e2e)', () => {
     const reflector = app.get(Reflector);
     app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
+    app.setGlobalPrefix('/api');
     await app.init();
     api = request(app.getHttpServer());
   });
@@ -34,15 +35,15 @@ describe('AuthController (e2e)', () => {
 
   describe('/signup (POST)', () => {
     it('create new user', async () => {
-      const result = await api.post('/auth/signup').send({
-        username: 'john_doe',
+      const result = await api.post('/api/auth/signup').send({
+        email: 'john_doe@gmail.com',
         password: 'secret-password',
       });
 
       expect(result.statusCode).toBe(201);
       expect(result.body).toEqual({
         id: expect.any(Number),
-        username: 'john_doe',
+        email: 'john_doe@gmail.com',
       });
     });
   });

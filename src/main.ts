@@ -11,6 +11,7 @@ async function bootstrap() {
   const reflector = app.get(Reflector);
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
+  app.setGlobalPrefix('api');
   await app.listen(3000);
 }
 bootstrap();

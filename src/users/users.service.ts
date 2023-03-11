@@ -13,14 +13,14 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findOne(username: string): Promise<User | undefined> {
+  async findOne(email: string): Promise<User | undefined> {
     return this.usersRepository.findOneBy({
-      username,
+      email,
     });
   }
 
-  async checkPassword(user: User, password: string): Promise<boolean> {
-    return bcrypt.compare(user.password, password);
+  async checkPassword(user: User, rawPassword: string): Promise<boolean> {
+    return bcrypt.compare(rawPassword, user.password);
   }
 
   async create(createUserDto: CreateUseDto) {

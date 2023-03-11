@@ -8,14 +8,14 @@ export class User {
   id: number;
 
   @Column({ unique: true })
-  username: string;
+  email: string;
 
   @Exclude()
   @Column()
   password: string;
 
   @BeforeInsert()
-  async hasPassword() {
+  async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);
   }
 }

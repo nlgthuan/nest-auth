@@ -8,8 +8,8 @@ describe('UsersService', () => {
   let service: UsersService;
 
   const mockUserRepository = {
-    findOneBy: jest.fn().mockImplementation(({ username }) => ({
-      username,
+    findOneBy: jest.fn().mockImplementation(({ email }) => ({
+      email,
     })),
   };
   beforeEach(async () => {
@@ -28,15 +28,15 @@ describe('UsersService', () => {
   });
 
   describe('findOne', () => {
-    it('finds and returns user by username', async () => {
+    it('finds and returns user by email', async () => {
       const result = await service.findOne('johndoe@gmail.com');
 
       expect(result).toEqual({
-        username: 'johndoe@gmail.com',
+        email: 'johndoe@gmail.com',
       });
       expect(mockUserRepository.findOneBy).toHaveBeenCalledTimes(1);
       expect(mockUserRepository.findOneBy).toHaveBeenCalledWith({
-        username: 'johndoe@gmail.com',
+        email: 'johndoe@gmail.com',
       });
     });
   });
